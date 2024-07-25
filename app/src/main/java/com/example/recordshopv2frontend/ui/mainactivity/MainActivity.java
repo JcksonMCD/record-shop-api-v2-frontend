@@ -1,4 +1,4 @@
-package com.example.recordshopv2frontend.ui;
+package com.example.recordshopv2frontend.ui.mainactivity;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
