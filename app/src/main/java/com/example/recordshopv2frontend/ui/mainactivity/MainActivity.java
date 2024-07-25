@@ -13,6 +13,7 @@ import com.example.recordshopv2frontend.model.AlbumResponse;
 import com.example.recordshopv2frontend.service.AlbumService;
 import com.example.recordshopv2frontend.service.RetrofitInstance;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private AlbumAdapter albumAdapter;
-    private List<Album> albumList;
+    private List<Album> albumList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        albumAdapter = new AlbumAdapter(albumList);
+        recyclerView.setAdapter(albumAdapter);
 
         fetchAlbums();
     }
@@ -43,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<AlbumResponse>() {
             @Override
             public void onResponse(Call<AlbumResponse> call, Response<AlbumResponse> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     AlbumResponse albumResponse = response.body();
-                    albumList = albumResponse.getContent();
-                    albumAdapter = new AlbumAdapter(albumList);
-                    recyclerView.setAdapter(albumAdapter);
+                    albumList.clear(); // Clear existing data
+                    albumList.addAll(albumResponse.getContent()); // Add new data
+                    albumAdapter.notifyDataSetChanged(); // Notify adapter of data change
                 } else {
                     Log.e("MainActivity", "Failed to fetch albums: " + response.message());
                 }
