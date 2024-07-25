@@ -35,7 +35,13 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         holder.artistName.setText(album.getArtist().getName());
         holder.genre.setText(album.getGenre());
         holder.releaseYear.setText(String.valueOf(album.getReleaseYear()));
-        
+
+        // Load image using Glide
+        Glide.with(holder.itemView.getContext())
+                .load(album.getArtUrl())
+                .placeholder(R.drawable.placeholder_image)
+                .error(R.drawable.placeholder_image)
+                .into(holder.albumArt);
     }
 
     @Override
