@@ -1,4 +1,12 @@
 package com.example.recordshopv2frontend.service;
 
-public class AlbumService {
+import com.example.recordshopv2frontend.model.AlbumResponse;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+
+public interface AlbumService {
+    @GET("album")
+    Call<AlbumResponse> getAllAlbums(@Query("pageNo") int pageNo, @Query("pageSize") int pageSize);
 }
