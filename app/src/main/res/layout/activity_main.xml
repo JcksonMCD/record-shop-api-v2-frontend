@@ -9,7 +9,7 @@
         android:id="@+id/headerText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Spin and Groove/ Mac and Tracks Records"
+        android:text="Spin and Groove"
         android:textSize="45sp"
         android:gravity="center"
         android:layout_marginTop="10dp"

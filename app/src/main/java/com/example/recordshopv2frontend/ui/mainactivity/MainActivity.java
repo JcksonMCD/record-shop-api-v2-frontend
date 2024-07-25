@@ -37,6 +37,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchAlbums() {
+        AlbumService service = RetrofitInstance.getClient().create(AlbumService.class);
+        Call<AlbumResponse> call = service.getAllAlbums(0, 10);
 
+        call.enqueue(new Callback<AlbumResponse>() {
+            @Override
+            public void onResponse(Call<AlbumResponse> call, Response<AlbumResponse> response) {
+                if (response.isSuccessful()) {
+                    AlbumResponse albumResponse = response.body();
+                    albumList = albumResponse.getContent();
+                    albumAdapter = new AlbumAdapter(albumList);
+                    recyclerView.setAdapter(albumAdapter);
+                } else {
+                    Log.e("MainActivity", "Failed to fetch albums: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AlbumResponse> call, Throwable t) {
+                Log.e("MainActivity", "Error fetching albums", t);
+            }
+        });
     }
 }
