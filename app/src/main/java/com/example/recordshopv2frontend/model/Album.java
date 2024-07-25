@@ -64,5 +64,5 @@ public class Album {
     public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
-    
+
 }
