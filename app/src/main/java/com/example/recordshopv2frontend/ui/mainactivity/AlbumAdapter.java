@@ -15,6 +15,34 @@ import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
 
+    private List<Album> albumList;
+
+    public AlbumAdapter(List<Album> albumList) {
+        this.albumList = albumList;
+    }
+
+    @NonNull
+    @Override
+    public AlbumViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_album, parent, false);
+        return new AlbumViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull AlbumViewHolder holder, int position) {
+        Album album = albumList.get(position);
+        holder.albumName.setText(album.getAlbumName());
+        holder.artistName.setText(album.getArtist().getName());
+        holder.genre.setText(album.getGenre());
+        holder.releaseYear.setText(String.valueOf(album.getReleaseYear()));
+        
+    }
+
+    @Override
+    public int getItemCount() {
+        return albumList.size();
+    }
+
     public static class AlbumViewHolder extends RecyclerView.ViewHolder {
         ImageView albumArt;
         TextView albumName;
