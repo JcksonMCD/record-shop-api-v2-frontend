@@ -1,6 +1,11 @@
 package com.example.recordshopv2frontend.model;
 
-public class Artist {
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
+import com.example.recordshopv2frontend.BR;
+
+public class Artist extends BaseObservable {
     private long id;
     private String name;
 
@@ -12,11 +17,13 @@ public class Artist {
         this.id = id;
     }
 
+    @Bindable
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
     }
 }
