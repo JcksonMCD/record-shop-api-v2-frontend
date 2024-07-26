@@ -68,7 +68,7 @@ public class Album extends BaseObservable {
     }
 
     public void setReleaseYear(String releaseYear) {
-        this.releaseYear = Integer.valueOf(releaseYear);
+        this.releaseYear = Integer.parseInt(releaseYear);
         notifyPropertyChanged(BR.releaseYear);
     }
 
@@ -78,7 +78,7 @@ public class Album extends BaseObservable {
     }
 
     public void setStockQuantity(String stockQuantity) {
-        this.stockQuantity = Integer.valueOf(stockQuantity);
+        this.stockQuantity = Integer.parseInt(stockQuantity);
         notifyPropertyChanged(BR.stockQuantity);
     }
 }
