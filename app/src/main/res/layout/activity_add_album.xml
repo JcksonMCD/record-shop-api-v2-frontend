@@ -49,7 +49,7 @@
             android:id="@+id/addArtist"
             android:hint="Artist"
             android:textColorHint="@color/dark_grey"
-            android:text="@={album.artist.artistName}"
+            android:text="@={album.artist.name}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"

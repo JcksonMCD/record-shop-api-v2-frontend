@@ -49,12 +49,12 @@ public class Album {
         this.artUrl = artUrl;
     }
 
-    public int getReleaseYear() {
-        return releaseYear;
+    public String getReleaseYear() {
+        return String.valueOf(releaseYear);
     }
 
-    public void setReleaseYear(int releaseYear) {
-        this.releaseYear = releaseYear;
+    public void setReleaseYear(String releaseYear) {
+        this.releaseYear = Integer.valueOf(releaseYear);
     }
 
     public int getStockQuantity() {
