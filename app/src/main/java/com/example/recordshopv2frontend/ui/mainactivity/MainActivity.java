@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchAlbums() {
-        AlbumService service = RetrofitInstance.getClient().create(AlbumService.class);
+        AlbumService service = RetrofitInstance.getClient();
         Call<AlbumResponse> call = service.getAllAlbums(0, 10);
 
         call.enqueue(new Callback<AlbumResponse>() {
