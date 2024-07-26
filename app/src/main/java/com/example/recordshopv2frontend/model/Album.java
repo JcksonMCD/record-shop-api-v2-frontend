@@ -57,12 +57,12 @@ public class Album {
         this.releaseYear = Integer.valueOf(releaseYear);
     }
 
-    public int getStockQuantity() {
-        return stockQuantity;
+    public String getStockQuantity() {
+        return String.valueOf(stockQuantity);
     }
 
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
+    public void setStockQuantity(String stockQuantity) {
+        this.stockQuantity = Integer.valueOf(stockQuantity);
     }
 
 }
