@@ -1,6 +1,8 @@
 package com.example.recordshopv2frontend.model;
 
-public class Artist {
+import androidx.databinding.BaseObservable;
+
+public class Artist extends BaseObservable {
     private long id;
     private String name;
 
