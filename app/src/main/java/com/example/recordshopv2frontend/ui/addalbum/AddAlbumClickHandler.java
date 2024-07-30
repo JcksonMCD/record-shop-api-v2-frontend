@@ -29,11 +29,21 @@ public class AddAlbumClickHandler {
         if (album.getArtist() == null ||
                 album.getAlbumName() == null ||
                 album.getGenre() == null ||
-                album.getReleaseYear() == null ||
-                album.getStockQuantity() == null) {
+                Integer.parseInt(album.getReleaseYear()) == 0 ||
+                Integer.parseInt(album.getStockQuantity()) == 0 ){
             Toast.makeText(context, "Fields must not be empty", Toast.LENGTH_SHORT).show();
         } else {
+            Intent intent = new Intent(context, MainActivity.class);
+            Album submitAlbum = new Album(
+                    album.getAlbumName(),
+                    album.getArtist(),
+                    album.getGenre(),
+                    album.getArtUrl(),
+                    Integer.parseInt(album.getReleaseYear()),
+                    Integer.parseInt(album.getStockQuantity()));
 
+            mainActivityViewModel.addAlbum(submitAlbum);
+            context.startActivity(intent);
         }
     }
 }
