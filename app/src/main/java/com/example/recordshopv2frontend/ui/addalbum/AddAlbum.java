@@ -32,6 +32,6 @@ public class AddAlbum extends AppCompatActivity {
         clickHandler = new AddAlbumClickHandler(album, this, model);
         binding.setClickHandler(clickHandler);
         binding.setAlbum(album);
-        
+
     }
 }
