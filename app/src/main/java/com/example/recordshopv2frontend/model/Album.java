@@ -14,6 +14,15 @@ public class Album extends BaseObservable {
     private int releaseYear;
     private int stockQuantity;
 
+    public Album(String albumName, Artist artist, String genre, String artUrl, int releaseYear, int stockQuantity) {
+        this.albumName = albumName;
+        this.artist = artist;
+        this.genre = genre;
+        this.artUrl = artUrl;
+        this.releaseYear = releaseYear;
+        this.stockQuantity = stockQuantity;
+    }
+
     public long getId() {
         return id;
     }

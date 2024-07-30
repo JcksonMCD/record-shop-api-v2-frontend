@@ -3,6 +3,7 @@ package com.example.recordshopv2frontend.ui.addalbum;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.recordshopv2frontend.model.Album;
 import com.example.recordshopv2frontend.ui.mainactivity.MainActivity;
@@ -22,5 +23,17 @@ public class AddAlbumClickHandler {
     public void backButtonClicked(View view) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
+    }
+
+    public void submitButtonClicked(View view) {
+        if (album.getArtist() == null ||
+                album.getAlbumName() == null ||
+                album.getGenre() == null ||
+                album.getReleaseYear() == null ||
+                album.getStockQuantity() == null) {
+            Toast.makeText(context, "Fields must not be empty", Toast.LENGTH_SHORT).show();
+        } else {
+
+        }
     }
 }
