@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.recordshopv2frontend.model.Album;
+import com.example.recordshopv2frontend.model.Artist;
 import com.example.recordshopv2frontend.ui.mainactivity.MainActivity;
 import com.example.recordshopv2frontend.ui.mainactivity.MainActivityViewModel;
 
@@ -26,24 +27,41 @@ public class AddAlbumClickHandler {
     }
 
     public void submitButtonClicked(View view) {
-        if (album.getArtist() == null ||
-                album.getAlbumName() == null ||
-                album.getGenre() == null ||
-                Integer.parseInt(album.getReleaseYear()) == 0 ||
-                Integer.parseInt(album.getStockQuantity()) == 0 ){
-            Toast.makeText(context, "Fields must not be empty", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent = new Intent(context, MainActivity.class);
-            Album submitAlbum = new Album(
-                    album.getAlbumName(),
-                    album.getArtist(),
-                    album.getGenre(),
-                    album.getArtUrl(),
-                    Integer.parseInt(album.getReleaseYear()),
-                    Integer.parseInt(album.getStockQuantity()));
-
-            mainActivityViewModel.addAlbum(submitAlbum);
-            context.startActivity(intent);
+        // Seperated out toasts to help debug
+        Artist artist = album.getArtist();
+        if (artist == null || artist.getName() == null || artist.getName().isEmpty()) {
+            Toast.makeText(context, "Artist field must not be empty", Toast.LENGTH_SHORT).show();
+            return;
         }
-    }
+        if (album.getAlbumName() == null || album.getAlbumName().isEmpty()) {
+            Toast.makeText(context, "Album name must not be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (album.getGenre() == null || album.getGenre().isEmpty()) {
+            Toast.makeText(context, "Genre must not be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (album.getReleaseYear() == 0) {
+            Toast.makeText(context, "Release year must not be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (album.getStockQuantity() == 0) {
+            Toast.makeText(context, "Stock quantity must not be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Proceed with submission
+        Album submitAlbum = new Album(
+                album.getAlbumName(),
+                new Artist(artist.getName()),
+                album.getGenre(),
+                album.getArtUrl(),
+                album.getReleaseYear(),
+                album.getStockQuantity()
+        );
+
+        mainActivityViewModel.addAlbum(submitAlbum);
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+        }
 }
