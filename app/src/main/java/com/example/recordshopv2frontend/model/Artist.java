@@ -13,6 +13,9 @@ public class Artist extends BaseObservable {
         this.name = name;
     }
 
+    public Artist() {
+    }
+
     public long getId() {
         return id;
     }
