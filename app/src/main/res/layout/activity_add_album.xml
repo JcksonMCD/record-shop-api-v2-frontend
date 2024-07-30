@@ -110,7 +110,7 @@
             android:backgroundTint="@color/dark_grey"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:onClick="@{clickHandler::submitAddAlbum}"/>
+            android:onClick="@{clickHandler::submitButtonClicked}"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="50dp"
@@ -123,7 +123,7 @@
             app:maxImageSize="35dp"
             android:backgroundTint="@color/dark_grey"
             app:fabCustomSize="50dp"
-            android:onClick="@{clickHandler::returnToHomePage}"
+            android:onClick="@{clickHandler::backButtonClicked}"
             />
 
 
