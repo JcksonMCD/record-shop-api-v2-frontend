@@ -13,6 +13,6 @@ public interface AlbumService {
     @GET("album")
     Call<AlbumResponse> getAllAlbums(@Query("pageNo") int pageNo, @Query("pageSize") int pageSize);
 
-    @POST
+    @POST("album")
     Call<Album> postAlbum(@Body Album album);
 }
