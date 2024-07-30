@@ -7,20 +7,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.recordshopv2frontend.R;
+import com.example.recordshopv2frontend.databinding.ActivityAddAlbumBinding;
+import com.example.recordshopv2frontend.model.Album;
+import com.example.recordshopv2frontend.ui.mainactivity.MainActivityViewModel;
 
 public class AddAlbum extends AppCompatActivity {
+    ActivityAddAlbumBinding binding;
+    MainActivityViewModel model;
+    AddAlbumClickHandler clickHandler;
+    Album album;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_album);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        album = new Album();
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_album);
+        model = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        clickHandler = new AddAlbumClickHandler(album, this, model);
+        binding.setClickHandler(clickHandler);
+        binding.setAlbum(album);
+
     }
 }
