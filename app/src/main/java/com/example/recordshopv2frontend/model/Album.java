@@ -23,6 +23,9 @@ public class Album extends BaseObservable {
         this.stockQuantity = stockQuantity;
     }
 
+    public Album() {
+    }
+
     public long getId() {
         return id;
     }
