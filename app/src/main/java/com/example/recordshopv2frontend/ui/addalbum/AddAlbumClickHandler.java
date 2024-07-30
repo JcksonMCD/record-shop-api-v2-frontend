@@ -9,4 +9,10 @@ public class AddAlbumClickHandler {
     Album album;
     Context context;
     MainActivityViewModel mainActivityViewModel;
+
+    public AddAlbumClickHandler(Album album, Context context, MainActivityViewModel mainActivityViewModel) {
+        this.album = album;
+        this.context = context;
+        this.mainActivityViewModel = mainActivityViewModel;
+    }
 }
