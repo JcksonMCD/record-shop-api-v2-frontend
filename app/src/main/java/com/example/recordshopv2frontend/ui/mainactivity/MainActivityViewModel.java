@@ -6,10 +6,10 @@ import com.example.recordshopv2frontend.model.Album;
 import com.example.recordshopv2frontend.model.AlbumRepository;
 
 public class MainActivityViewModel extends ViewModel {
-    AlbumRepository albumRepository;
+    AlbumRepository albumRepository = new AlbumRepository();
 
-    public MainActivityViewModel(AlbumRepository albumRepository) {
-        this.albumRepository = albumRepository;
+    public MainActivityViewModel() {
+
     }
 
     public void addAlbum(Album album) {

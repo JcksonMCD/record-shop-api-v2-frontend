@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recordshopv2frontend.R;
+import com.example.recordshopv2frontend.databinding.ActivityMainBinding;
 import com.example.recordshopv2frontend.model.Album;
 import com.example.recordshopv2frontend.model.AlbumResponse;
 import com.example.recordshopv2frontend.service.AlbumService;
@@ -25,11 +27,15 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AlbumAdapter albumAdapter;
     private List<Album> albumList = new ArrayList<>();
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.setClickHandler(new MainActivityClickHandler(this));
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

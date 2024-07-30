@@ -1,7 +1,11 @@
 package com.example.recordshopv2frontend.model;
 
+import android.widget.TextView;
+
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingAdapter;
 
 import com.example.recordshopv2frontend.BR;
 
@@ -75,23 +79,37 @@ public class Album extends BaseObservable {
     }
 
     @Bindable
-    public String getReleaseYear() {
-        return String.valueOf(releaseYear);
+    public int getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setReleaseYear(String releaseYear) {
-        this.releaseYear = Integer.parseInt(releaseYear);
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
         notifyPropertyChanged(BR.releaseYear);
     }
 
     @Bindable
-    public String getStockQuantity() {
-        return String.valueOf(stockQuantity);
+    public int getStockQuantity() {
+        return stockQuantity;
     }
 
-    public void setStockQuantity(String stockQuantity) {
-        this.stockQuantity = Integer.parseInt(stockQuantity);
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
         notifyPropertyChanged(BR.stockQuantity);
+    }
+
+    @BindingAdapter("android:text")
+    public static void setText(TextView view, int value) {
+        if (view.getText() != null
+                && ( !view.getText().toString().isEmpty() )
+                && Integer.parseInt(view.getText().toString()) != value) {
+            view.setText(Integer.toString(value));
+        }
+    }
+
+    @InverseBindingAdapter(attribute = "android:text")
+    public static int getText(TextView view) {
+        return Integer.parseInt(view.getText().toString());
     }
 }
 
