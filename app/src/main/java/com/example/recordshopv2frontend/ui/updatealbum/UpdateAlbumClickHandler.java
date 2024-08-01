@@ -4,10 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.recordshopv2frontend.model.Album;
 import com.example.recordshopv2frontend.ui.mainactivity.MainActivity;
 import com.example.recordshopv2frontend.ui.mainactivity.MainActivityViewModel;
+
+import java.util.Objects;
 
 public class UpdateAlbumClickHandler {
     private Context context;
@@ -39,5 +42,31 @@ public class UpdateAlbumClickHandler {
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> { });
         alertBuilder.show();
+    }
+
+    public void submitButtonClicked(View view) {
+
+        Album updatedAlbum = new Album(
+                album.getAlbumName(),
+                album.getArtist(),
+                album.getGenre(),
+                album.getArtUrl(),
+                album.getReleaseYear(),
+                album.getStockQuantity()
+        );
+
+        if (Objects.equals(updatedAlbum.getArtist(), "") ||
+                Objects.equals(updatedAlbum.getGenre(), "") ||
+                Objects.equals(updatedAlbum.getAlbumName(), "") ||
+                Objects.equals(updatedAlbum.getArtUrl(), "") ||
+                Objects.equals(updatedAlbum.getReleaseYear(), "") ||
+                Objects.equals(updatedAlbum.getStockQuantity(), "")) {
+            Toast.makeText(context, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(context, MainActivity.class);
+            albumID = album.getId();
+            model.editAlbum(albumID, updatedAlbum);
+            context.startActivity(intent);
+        }
     }
 }
