@@ -2,14 +2,11 @@ package com.example.recordshopv2frontend.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
-
+import android.widget.EditText;
 import com.example.recordshopv2frontend.BR;
 
 public class Album extends BaseObservable implements Parcelable {
@@ -21,6 +18,7 @@ public class Album extends BaseObservable implements Parcelable {
     private int releaseYear;
     private int stockQuantity;
 
+    // Constructor
     public Album(String albumName, Artist artist, String genre, String artUrl, int releaseYear, int stockQuantity) {
         this.albumName = albumName;
         this.artist = artist;
@@ -30,15 +28,58 @@ public class Album extends BaseObservable implements Parcelable {
         this.stockQuantity = stockQuantity;
     }
 
+    // Default constructor
     public Album() {
     }
 
+    // Parcelable constructor
+    protected Album(Parcel in) {
+        id = in.readLong();
+        albumName = in.readString();
+        artist = in.readParcelable(Artist.class.getClassLoader());
+        genre = in.readString();
+        artUrl = in.readString();
+        releaseYear = in.readInt();
+        stockQuantity = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(albumName);
+        dest.writeParcelable(artist, flags);
+        dest.writeString(genre);
+        dest.writeString(artUrl);
+        dest.writeInt(releaseYear);
+        dest.writeInt(stockQuantity);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Album> CREATOR = new Creator<Album>() {
+        @Override
+        public Album createFromParcel(Parcel in) {
+            return new Album(in);
+        }
+
+        @Override
+        public Album[] newArray(int size) {
+            return new Album[size];
+        }
+    };
+
+    // Getters and Setters
+    @Bindable
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+        notifyPropertyChanged(BR.id);
     }
 
     @Bindable
@@ -101,35 +142,23 @@ public class Album extends BaseObservable implements Parcelable {
         notifyPropertyChanged(BR.stockQuantity);
     }
 
+    // Data Binding Adapters
     @BindingAdapter("android:text")
-    public static void setText(TextView view, int value) {
-        if (view.getText() != null
-                && ( !view.getText().toString().isEmpty() )
-                && Integer.parseInt(view.getText().toString()) != value) {
-            view.setText(Integer.toString(value));
-        }
+    public static void setInteger(EditText view, int value) {
+        view.setText(String.valueOf(value));
     }
 
     @InverseBindingAdapter(attribute = "android:text")
-    public static int getText(TextView view) {
-        return Integer.parseInt(view.getText().toString());
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int i) {
-        dest.writeLong(id);
-        dest.writeString(artist.getName());
-        dest.writeString(genre);
-        dest.writeString(albumName);
-        dest.writeString(artUrl);
-        dest.writeInt(releaseYear);
-        dest.writeInt(stockQuantity);
+    public static int getInteger(EditText view) {
+        String value = view.getText().toString();
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return 0; // default value
+        }
     }
 }
+
+
 
 
