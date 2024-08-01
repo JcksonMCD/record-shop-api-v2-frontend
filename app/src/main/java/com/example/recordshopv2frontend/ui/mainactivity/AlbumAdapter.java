@@ -53,7 +53,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     }
 
     public void setFilteredList(ArrayList<Album> filteredList) {
-
+        this.albumList = filteredList;
+        notifyDataSetChanged();
     }
 
     public static class AlbumViewHolder extends RecyclerView.ViewHolder {
