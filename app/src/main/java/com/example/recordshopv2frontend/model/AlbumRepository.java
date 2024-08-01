@@ -34,4 +34,8 @@ public class AlbumRepository {
             }
         });
     }
+
+    public void editAlbum(long id, Album abum){
+        
+    }
 }
