@@ -35,7 +35,20 @@ public class AlbumRepository {
         });
     }
 
-    public void editAlbum(long id, Album abum){
-        
+    public void editAlbum(long id, Album album){
+        AlbumService albumService = RetrofitInstance.getClient();
+        Call<Album> call = albumService.putAlbum(id, album);
+
+        call.enqueue(new Callback<Album>() {
+            @Override
+            public void onResponse(Call<Album> call, Response<Album> response) {
+                Toast.makeText(context, "Album edited successfully", Toast.LENGTH_SHORT);
+            }
+
+            @Override
+            public void onFailure(Call<Album> call, Throwable throwable) {
+                Toast.makeText(context, "Album unable to be edited", Toast.LENGTH_SHORT);
+            }
+        });
     }
 }
