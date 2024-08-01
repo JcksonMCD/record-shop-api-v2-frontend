@@ -3,6 +3,8 @@ package com.example.recordshopv2frontend.ui.mainactivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.SearchView;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     private AlbumAdapter albumAdapter;
     private List<Album> albumList = new ArrayList<>();
     private ActivityMainBinding binding;
+    SearchView searchView;
+    Spinner spinner;
+    String spinnerSelection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
