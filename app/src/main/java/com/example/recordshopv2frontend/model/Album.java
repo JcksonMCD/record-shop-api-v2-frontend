@@ -121,8 +121,14 @@ public class Album extends BaseObservable implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(@NonNull Parcel parcel, int i) {
-
+    public void writeToParcel(@NonNull Parcel dest, int i) {
+        dest.writeLong(id);
+        dest.writeString(artist.getName());
+        dest.writeString(genre);
+        dest.writeString(albumName);
+        dest.writeString(artUrl);
+        dest.writeInt(releaseYear);
+        dest.writeInt(stockQuantity);
     }
 }
 
