@@ -9,8 +9,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.recordshopv2frontend.R;
+import com.example.recordshopv2frontend.databinding.ActivityUpdateAlbumBinding;
+import com.example.recordshopv2frontend.model.Album;
 
 public class UpdateAlbum extends AppCompatActivity {
+    ActivityUpdateAlbumBinding activityUpdateAlbumBinding;
+    UpdateAlbumClickHandler updateAlbumClickHandler;
+    Album album;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
