@@ -16,17 +16,18 @@ import java.util.List;
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
 
     private List<Album> albumList;
-    RecyclerViewInterface recyclerViewInterface;
+    private RecyclerViewInterface recyclerViewInterface;
 
-    public AlbumAdapter(List<Album> albumList) {
+    public AlbumAdapter(List<Album> albumList, RecyclerViewInterface recyclerViewInterface) {
         this.albumList = albumList;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
     @Override
     public AlbumViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_album, parent, false);
-        return new AlbumViewHolder(view);
+        return new AlbumViewHolder(view, recyclerViewInterface);
     }
 
     @Override
@@ -57,13 +58,22 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         TextView genre;
         TextView releaseYear;
 
-        public AlbumViewHolder(@NonNull View itemView) {
+        public AlbumViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
             albumArt = itemView.findViewById(R.id.albumArt);
             albumName = itemView.findViewById(R.id.albumName);
             artistName = itemView.findViewById(R.id.artistName);
             genre = itemView.findViewById(R.id.genre);
             releaseYear = itemView.findViewById(R.id.releaseYear);
+
+            itemView.setOnClickListener(v -> {
+                if (recyclerViewInterface != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        recyclerViewInterface.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 }
