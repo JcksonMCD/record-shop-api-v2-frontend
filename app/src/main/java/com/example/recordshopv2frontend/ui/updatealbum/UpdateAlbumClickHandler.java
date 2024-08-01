@@ -1,5 +1,6 @@
 package com.example.recordshopv2frontend.ui.updatealbum;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -23,5 +24,20 @@ public class UpdateAlbumClickHandler {
     public void backButtonClicked(View view) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
+    }
+
+    public void deleteButtonClicked(View view) {
+
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+        alertBuilder.setTitle("Delete this album?")
+                .setMessage("This will delete " + album.getAlbumName() + " by " + album.getArtist() + " permanently.")
+                .setPositiveButton("Delete", (dialog, id) -> {
+                    Intent intent = new Intent(context, MainActivity.class);
+                    albumID = album.getId();
+                    model.deleteAlbum(albumID);
+                    context.startActivity(intent);
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> { });
+        alertBuilder.show();
     }
 }
