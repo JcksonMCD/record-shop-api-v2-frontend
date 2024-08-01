@@ -22,5 +22,6 @@ public interface AlbumService {
     @PUT("album/{id}")
     Call<Album> putAlbum(@Path("id") long id, @Body Album album);
 
-
+    @DELETE("album/{id}")
+    Call<String> deleteAlbum(@Path("id") long id);
 }
