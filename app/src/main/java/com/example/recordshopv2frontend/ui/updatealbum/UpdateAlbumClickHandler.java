@@ -33,7 +33,7 @@ public class UpdateAlbumClickHandler {
 
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
         alertBuilder.setTitle("Delete this album?")
-                .setMessage("This will delete " + album.getAlbumName() + " by " + album.getArtist() + " permanently.")
+                .setMessage("This will delete " + album.getAlbumName() + " by " + album.getArtist().getName() + " permanently.")
                 .setPositiveButton("Delete", (dialog, id) -> {
                     Intent intent = new Intent(context, MainActivity.class);
                     albumID = album.getId();
