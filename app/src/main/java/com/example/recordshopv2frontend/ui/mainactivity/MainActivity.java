@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(MainActivity.this, UpdateAlbum.class);
-        intent.putExtra("ALBUM_KEY", albumList.get(position).getId());
+        intent.putExtra("ALBUM_KEY", albumList.get(position));
         startActivity(intent);
     }
 }
