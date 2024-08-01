@@ -51,4 +51,8 @@ public class AlbumRepository {
             }
         });
     }
+
+    public void deleteAlbum(long id){
+        
+    }
 }
