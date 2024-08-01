@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.example.recordshopv2frontend.R;
 import com.example.recordshopv2frontend.model.Album;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
@@ -49,6 +50,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     @Override
     public int getItemCount() {
         return albumList.size();
+    }
+
+    public void setFilteredList(ArrayList<Album> filteredList) {
+        this.albumList = filteredList;
+        notifyDataSetChanged();
     }
 
     public static class AlbumViewHolder extends RecyclerView.ViewHolder {
