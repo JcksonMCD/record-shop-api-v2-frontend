@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
 
         spinner = binding.dropdown;
         spinner.setOnItemSelectedListener(this);
-        String[] dropItems = getResources().getStringArray(R.array.);
+        String[] dropItems = getResources().getStringArray(R.array.filter_items);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, dropItems);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -107,6 +107,49 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         Intent intent = new Intent(MainActivity.this, UpdateAlbum.class);
         intent.putExtra("ALBUM_KEY", albumList.get(position));
         startActivity(intent);
+    }
+
+    private void filterList(String query) {
+        ArrayList<Album> filteredList = new ArrayList<>();
+        for (Album album : albumList) {
+            boolean shouldAdd = false;
+            switch (spinnerSelection) {
+                case "All":
+                    shouldAdd = album.getArtist().getName().toLowerCase().contains(query.toLowerCase()) ||
+                            album.getAlbumName().toLowerCase().contains(query.toLowerCase()) ||
+                            album.getGenre().toLowerCase().contains(query.toLowerCase()) ||
+                            String.valueOf(album.getReleaseYear()).contains(query) ||
+                            String.valueOf(album.getStockQuantity()).contains(query);
+                    break;
+                case "Artist":
+                    shouldAdd = album.getArtist().getName().toLowerCase().contains(query.toLowerCase());
+                    break;
+                case "Album name":
+                    shouldAdd = album.getAlbumName().toLowerCase().contains(query.toLowerCase());
+                    break;
+                case "Genre":
+                    shouldAdd = album.getGenre().toLowerCase().contains(query.toLowerCase());
+                    break;
+            }
+            if (shouldAdd && !filteredList.contains(album)) {
+                filteredList.add(album);
+            }
+        }
+        if (filteredList.isEmpty()) {
+            Toast.makeText(this, "No albums found", Toast.LENGTH_SHORT).show();
+        } else {
+            albumAdapter.setFilteredList(filteredList);
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        spinnerSelection = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
 }
