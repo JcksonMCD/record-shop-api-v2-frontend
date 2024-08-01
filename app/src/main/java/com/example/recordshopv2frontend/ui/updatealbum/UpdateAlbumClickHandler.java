@@ -1,8 +1,11 @@
 package com.example.recordshopv2frontend.ui.updatealbum;
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 
 import com.example.recordshopv2frontend.model.Album;
+import com.example.recordshopv2frontend.ui.mainactivity.MainActivity;
 import com.example.recordshopv2frontend.ui.mainactivity.MainActivityViewModel;
 
 public class UpdateAlbumClickHandler {
@@ -15,5 +18,10 @@ public class UpdateAlbumClickHandler {
         this.context = context;
         this.album = album;
         this.model = model;
+    }
+
+    public void backButtonClicked(View view) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
     }
 }
