@@ -1,7 +1,10 @@
 package com.example.recordshopv2frontend.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
@@ -9,7 +12,7 @@ import androidx.databinding.InverseBindingAdapter;
 
 import com.example.recordshopv2frontend.BR;
 
-public class Album extends BaseObservable {
+public class Album extends BaseObservable implements Parcelable {
     private long id;
     private String albumName;
     private Artist artist;
@@ -110,6 +113,16 @@ public class Album extends BaseObservable {
     @InverseBindingAdapter(attribute = "android:text")
     public static int getText(TextView view) {
         return Integer.parseInt(view.getText().toString());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+
     }
 }
 
