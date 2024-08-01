@@ -16,6 +16,7 @@ import java.util.List;
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
 
     private List<Album> albumList;
+    RecyclerViewInterface recyclerViewInterface;
 
     public AlbumAdapter(List<Album> albumList) {
         this.albumList = albumList;

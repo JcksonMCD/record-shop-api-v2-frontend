@@ -1,5 +1,6 @@
 package com.example.recordshopv2frontend.ui.mainactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -14,6 +15,7 @@ import com.example.recordshopv2frontend.model.Album;
 import com.example.recordshopv2frontend.model.AlbumResponse;
 import com.example.recordshopv2frontend.service.AlbumService;
 import com.example.recordshopv2frontend.service.RetrofitInstance;
+import com.example.recordshopv2frontend.ui.updatealbum.UpdateAlbum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewInterface {
 
     private RecyclerView recyclerView;
     private AlbumAdapter albumAdapter;
@@ -68,5 +70,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("MainActivity", "Error fetching albums", t);
             }
         });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(MainActivity.this, UpdateAlbum.class);
+        intent.putExtra("ALBUM_KEY", albumList.get(position).getId());
+        startActivity(intent);
     }
 }
