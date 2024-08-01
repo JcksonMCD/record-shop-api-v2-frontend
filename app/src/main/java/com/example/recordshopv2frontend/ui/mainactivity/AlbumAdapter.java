@@ -16,10 +16,11 @@ import java.util.List;
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
 
     private List<Album> albumList;
-    RecyclerViewInterface recyclerViewInterface;
+    private RecyclerViewInterface recyclerViewInterface;
 
-    public AlbumAdapter(List<Album> albumList) {
+    public AlbumAdapter(List<Album> albumList, RecyclerViewInterface recyclerViewInterface) {
         this.albumList = albumList;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
